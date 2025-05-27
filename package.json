@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "google-auth-library": "^9.15.1",
+    "react-router-dom": "^7.0.2"
+  },
+  "devDependencies": {
+    "vite": "^6.1.0"
+  }
+}

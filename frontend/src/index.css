@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.gradient-text {
+  background: linear-gradient(to right, #4169E1, #191a8f);
+  /* Adjust colors as needed */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.underline-custom {
+  text-decoration: underline;
+  text-decoration-color: #4169E1;
+  /* Change this color as needed */
+}
+
+
+.sliding-element {
+  @apply w-64 h-24 bg-blue-200 flex items-center justify-center border border-gray-300 my-2;
+}
+
+.slide-enter {
+  transform: translateX(100%);
+}
+
+.slide-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease-in-out;
+}
+
+.slide-exit {
+  transform: translateX(0);
+}
+
+.slide-exit-active {
+  transform: translateX(100%);
+  transition: transform 300ms ease-in-out;
+}

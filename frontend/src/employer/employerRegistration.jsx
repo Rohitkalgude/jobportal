@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
 import { FcBusinessman } from "react-icons/fc";
 import { LuAsterisk } from "react-icons/lu";
+import { toast } from "react-toastify";
+
 
 function EmployerRegistration() {
   const navigate = useNavigate();
@@ -39,10 +41,12 @@ function EmployerRegistration() {
       if (!response.ok) throw new Error(data.message || "Registration failed");
       localStorage.setItem("employer", JSON.stringify(data.employer));
       localStorage.setItem("token", data.token);
-      alert("Registration successful! Please verify your email.");
+      toast.success("Registration successful!");
       navigate("/employer/home");
     } catch (err) {
-      setError(err.message);
+      const message = err.message || "Login failed";
+      setError(message);
+      toast.error(message);
     }
   };
 

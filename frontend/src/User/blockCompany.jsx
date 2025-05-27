@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaBan } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 function BlockCompany() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ function BlockCompany() {
 
   const handleBlockCompany = async () => {
     if (!companyname) {
-      alert("Please enter the company name.");
+      toast.warning("Please enter the company name.");
       return;
     }
 
@@ -19,7 +20,7 @@ function BlockCompany() {
 
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("No token found. Please log in again.");
+      toast.error("No token found. Please log in again.");
       return;
     }
 
@@ -36,15 +37,15 @@ function BlockCompany() {
 
       const data = await response.json();
       if (response.ok) {
-        alert(data.message || "Company has been blocked successfully.");
+        toast.success(data.message || "Company has been blocked successfully.");
         setCompanyName("");
         navigate("/");
       } else {
-        alert(`Failed to block company: ${data.error || "Unknown error"}`);
+        toast.error(`Failed to block company: ${data.error || "Unknown error"}`);
       }
     } catch (error) {
       console.error("Error blocking company:", error);
-      alert("An error occurred. Please try again later.");
+      toast.error("An error occurred. Please try again later.");
     } finally {
       setLoading(false);
     }

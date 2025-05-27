@@ -1,11 +1,13 @@
 import { FaSignOutAlt, FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 function Account() {
   const navigate = useNavigate(); // <-- Ensure this is declared correctly
 
   const handleLogout = () => {
-    alert("Logged out successfully!");
+    toast.success("Logout successfully!");
     navigate("/"); 
   };
 
@@ -33,15 +35,16 @@ function Account() {
 
       if (response.ok) {
         localStorage.clear(); // Clear all localStorage on account deletion
-        alert("Your account has been deleted successfully.");
+        toast.success("Your account has been deleted successfully.");
         navigate("/signup"); // You can also redirect to login if you prefer
       } else {
         const data = await response.json();
         alert(`Failed to delete account: ${data.error}`);
+        
       }
     } catch (error) {
-      console.error("Error deleting account:", error);
-      alert("An error occurred. Please try again later.");
+      const message = error.message || " Delete failed";
+      toast.error(message);
     }
   };
 

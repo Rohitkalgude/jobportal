@@ -102,7 +102,7 @@ root.render(
       <UserProvider>
         <EmployerProvider>
           <RouterProvider router={router} />
-          <UserProfile /> {/* This is where the context is consumed */}
+          <UserProfile />
         </EmployerProvider>
       </UserProvider>
     </AuthProvider>

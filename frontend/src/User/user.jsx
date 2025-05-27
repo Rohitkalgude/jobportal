@@ -10,6 +10,8 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { IoHomeOutline } from "react-icons/io5";
 import UserContext from "../Context/userContext";
+import { toast } from "react-toastify";
+
 
 // import { getUser } from "../API/userAPI";
 
@@ -261,6 +263,7 @@ function User() {
                     <p
                       className="text-lg font-semibold text-gray-600 mx-2"
                       onClick={() => {
+                        toast.success("Logout successfully!");
                         navigate("/userLogin");
                         setIsSidePanelOpen(!isSidePanelOpen);
                       }}

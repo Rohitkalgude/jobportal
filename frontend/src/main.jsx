@@ -1,5 +1,7 @@
 import ReactDOM from "react-dom/client";
 import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
@@ -30,9 +32,9 @@ import AboutUs from "./User/AboutUs.jsx";
 import EditJob from "./employer/editjob.jsx";
 import View from "./employer/view.jsx";
 import Filter from "./UserComponent/Fillter.jsx";
-import CompanyData from "./User/Companydata.jsx"
-import AppliedJobs from "./User/appliedJobs.jsx"
-import Savedjobs from "./User/savedjobs.jsx"
+import CompanyData from "./User/Companydata.jsx";
+import AppliedJobs from "./User/appliedJobs.jsx";
+import Savedjobs from "./User/savedjobs.jsx";
 import AllJob from "./User/allJob.jsx";
 
 const Router = createBrowserRouter([
@@ -189,6 +191,7 @@ root.render(
       <UserProvider>
         <EmployerProvider>
           <RouterProvider router={Router} />
+          <ToastContainer position="top-center" autoClose={2000} />
         </EmployerProvider>
       </UserProvider>
     </AuthProvider>

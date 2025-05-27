@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { EmployerContext } from "../Context/EmployerContextProvider";
 import { FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -55,14 +57,14 @@ const Profile = () => {
         localStorage.setItem("employer", JSON.stringify(data.updatedEmployer));
         localStorage.setItem("employerImage", imageURL);
         setIsEditable(false);
-        alert("Profile updated successfully!");
+        toast.success("Profile updated successfully!");
         navigate("/employer/home"); // ✅ Navigate after save
       } else {
         alert(data.message || "Error updating profile.");
       }
-    } catch (error) {
-      console.error("Error updating profile:", error);
-      alert("Failed to update profile.");
+    } catch (err) {
+      const message = err.message || "Error updating profile:";
+      toast.error(message);
     }
   };
 

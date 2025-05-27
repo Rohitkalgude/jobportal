@@ -9,6 +9,8 @@ import { BiSolidSchool } from "react-icons/bi";
 import { IoMdLogOut } from "react-icons/io";
 import "../index.css";
 import { EmployerContext } from "../Context/EmployerContextProvider";
+import { toast } from "react-toastify";
+
 
 function Employer() {
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
@@ -38,6 +40,7 @@ function Employer() {
   };
 
   const handleLogout = () => {
+    toast.success("Logout successfully!");
     navigate("/employerLogin");
   };
 

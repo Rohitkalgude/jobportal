@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+
 
 const JobDetail = () => {
   const navigate = useNavigate();
@@ -66,11 +68,11 @@ const JobDetail = () => {
       );
       localStorage.setItem("jobpost", JSON.stringify(response.data));
 
-      alert("Job Posted Successfully");
+      toast.success("Job Posted successfully!");
       navigate("/employer/Home");
-    } catch (error) {
-      console.error("Error:", error);
-      alert(error.response?.data?.message || "Something went wrong!");
+    } catch (err) {
+      const message = err.message || "Something went wrong!";
+      toast.error(message);
     }
   };
 

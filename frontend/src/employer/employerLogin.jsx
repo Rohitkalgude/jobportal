@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
 
 function EmployerLogin() {
   const [email, setEmail] = useState("");
@@ -31,12 +32,13 @@ function EmployerLogin() {
 
       if (!response.ok) throw new Error(data.message || "Login failed");
 
-      alert("✅ Login successful!");
+      toast.success("Login successful!");
       localStorage.setItem("employerr", JSON.stringify(data)); 
       navigate("/employer/home");
     } catch (err) {
-      console.error("❌ Login error:", err.message);
-      setError(err.message);
+      const message = err.message || "Login failed";
+      setError(message);
+      toast.error(message);
     }
   };
 
@@ -62,11 +64,12 @@ function EmployerLogin() {
         throw new Error(data.message || "Google login failed");
 
       localStorage.setItem("token", data.token);
-      alert("Google Login successful!");
+      toast.success("Google login successful!");
       navigate("/employer/home");
     } catch (error) {
-      console.error("❌ Google Login Error:", error.message);
-      setError(error.message || "Google login failed");
+      const message = error.message || "Google login failed";
+      setError(message);
+      toast.error(message);
     }
   };
 

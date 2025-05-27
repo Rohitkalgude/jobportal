@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const EditJob = () => {
 
@@ -60,10 +62,12 @@ const EditJob = () => {
       // Optionally update localStorage with the new data
       localStorage.setItem("jobToEdit", JSON.stringify({ ...initialData, ...formData }));
 
-      alert("Job updated successfully!");
+      toast.success("Job updated successfully!");
       navigate("/employer/Home");
     } catch (err) {
+      const message = err.message || "Job not updated successfully!";
       setError(err.message);
+      toast.error(message);
     }
   };
 

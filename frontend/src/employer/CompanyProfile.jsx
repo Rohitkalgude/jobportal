@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { EmployerContext } from "../Context/EmployerContextProvider";
 import { IoClose } from "react-icons/io5";
+import { toast } from "react-toastify";
+
 
 function CompanyProfile() {
   const { companyDetails = {}, setCompanyDetails } =
@@ -87,10 +89,12 @@ function CompanyProfile() {
 
       // Update state
       setCompanyDetails(updatedDetails);
-
-      alert("✅ Company details saved successfully!");
+      toast.success("Company details saved successfully!");
+      
     } catch (error) {
-      setError(error.message || "Something went wrong, please try again.");
+      const errMsg = error.message || "Something went wrong, please try again.";
+      setError(errMsg);
+      toast.error(errMsg);    
     } finally {
       setIsSaving(false);
     }

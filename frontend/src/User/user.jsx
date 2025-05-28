@@ -13,15 +13,8 @@ import UserContext from "../Context/userContext";
 import { toast } from "react-toastify";
 
 
-// import { getUser } from "../API/userAPI";
 
 function User() {
-  // const [userData, setUserData] = useState({});
-
-  // useEffect(() => {
-  //     userData = getUser();
-  // }, [])
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);

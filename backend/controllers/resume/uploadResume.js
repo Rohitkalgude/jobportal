@@ -11,12 +11,15 @@ const uploadResume = async (req, res) => {
     const newResume = new Resume({
       userId,
       employerId,
-      resumeUrl: req.file.path,
+      resumeUrl: req.file.path, // Cloudinary returns a URL here
     });
 
     await newResume.save();
-    res.status(201).json({ message: "Resume uploaded successfully", data: newResume });
 
+    res.status(201).json({
+      message: "Resume uploaded successfully",
+      data: newResume,
+    });
   } catch (error) {
     res.status(500).json({ message: "Server Error", error: error.message });
   }

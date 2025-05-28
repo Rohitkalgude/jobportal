@@ -22,6 +22,7 @@ function UserProfile() {
     workstatus: "experienced",
     education: "",
     profilePhoto: "",
+    resume: "", // <-- Add this
     experience: [],
     skills: "",
     savedJobs: [],
@@ -94,6 +95,41 @@ function UserProfile() {
       console.error("Image upload failed", err);
     } finally {
       setImgLoading(false);
+    }
+  };
+
+  // Resume upload handler - minor improvements, logs result for debug
+  const handleResumeUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "HireBridge");
+    data.append("cloud_name", "dizgp2fdp");
+
+    try {
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/dizgp2fdp/raw/upload",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+      const result = await response.json();
+      console.log("Cloudinary upload result:", result); // for debugging
+
+      if (result.secure_url) {
+        const updatedUser = { ...user, resume: result.secure_url };
+        setUser(updatedUser);
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        toast.success("Resume uploaded successfully!");
+      } else {
+        throw new Error("Invalid upload response");
+      }
+    } catch (err) {
+      console.error("Resume upload failed", err);
+      toast.error("Resume upload failed");
     }
   };
 
@@ -262,6 +298,46 @@ function UserProfile() {
             </ul>
           ) : (
             <p className="text-gray-500">No experience added</p>
+          )}
+        </div>
+
+        {/* Resume Upload */}
+        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+          <h3 className="text-lg font-semibold mb-2">Resume</h3>
+          {user.resume ? (
+            <div className="flex justify-between items-center">
+              <a
+                href={user.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline"
+              >
+                View Resume
+              </a>
+              {isEditing && (
+                <label className="bg-blue-600 text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-blue-700 transition">
+                  Upload New
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleResumeUpload}
+                    className="hidden"
+                  />
+                </label>
+              )}
+            </div>
+          ) : isEditing ? (
+            <label className="bg-blue-600 text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-blue-700 transition">
+              Upload Resume
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={handleResumeUpload}
+                className="hidden"
+              />
+            </label>
+          ) : (
+            <p className="text-gray-500">No resume uploaded</p>
           )}
         </div>
 

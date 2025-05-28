@@ -7,6 +7,7 @@ import {
   FaBriefcase,
   FaBuilding,
 } from "react-icons/fa";
+import {  toast } from "react-toastify";
 
 const EmployerJobApplications = () => {
   const [applications, setApplications] = useState([]);
@@ -43,6 +44,7 @@ const EmployerJobApplications = () => {
         setApplications(allApplications);
       } catch (err) {
         setError(err.message || "Something went wrong.");
+        toast.error(err.message || "Something went wrong.");
       } finally {
         setLoading(false);
       }
@@ -65,9 +67,19 @@ const EmployerJobApplications = () => {
       );
 
       if (!response.ok) throw new Error("Failed to update status.");
-      alert(`Application ${status.toUpperCase()} successfully!`);
+
+      toast.success(`Application ${status.toUpperCase()} successfully!`);
+
+      // Optionally update the UI
+      setApplications((prev) =>
+        prev.map((app) =>
+          app.applicantId === applicantId && app.jobId === jobId
+            ? { ...app, status }
+            : app
+        )
+      );
     } catch (err) {
-      alert(`❌ Error: ${err.message}`);
+      toast.error(`❌ Error: ${err.message}`);
     }
   };
 

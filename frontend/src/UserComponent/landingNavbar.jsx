@@ -179,3 +179,209 @@ const LandingNavbar = () => {
 
 export default LandingNavbar;
 
+
+
+
+
+// import { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { CiSearch } from "react-icons/ci";
+// import { TiThMenu } from "react-icons/ti";
+// import { IoClose } from "react-icons/io5";
+
+// const LandingNavbar = () => {
+//     const [isMenuOpen, setIsMenuOpen] = useState(false);
+//     const [searchQuery, setSearchQuery] = useState('');
+//     const [dropdownOpen, setDropdownOpen] = useState(false);
+//     const [active, setActive] = useState('');
+//     const navigate = useNavigate();
+
+//     const handleSearchSubmit = (e) => {
+//         e.preventDefault();
+//         console.log('Searching:', searchQuery);
+//     };
+
+//     return (
+//         <nav className="sticky top-0 z-50 bg-white shadow-sm border-b">
+//             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//                 <div className="flex items-center justify-between h-16">
+//                     {/* Logo */}
+//                     <div className="flex-shrink-0 cursor-pointer" onClick={() => navigate("/")}>
+//                         <img src="/Logo.png" alt="Logo" className="h-10 w-auto" />
+//                     </div>
+
+//                     {/* Search Bar - Desktop Only */}
+//                     <form
+//                         onSubmit={handleSearchSubmit}
+//                         className="hidden md:flex items-center flex-1 max-w-md mx-6"
+//                     >
+//                         <div className="relative w-full">
+//                             <input
+//                                 type="text"
+//                                 placeholder="Search jobs, companies..."
+//                                 value={searchQuery}
+//                                 onChange={(e) => setSearchQuery(e.target.value)}
+//                                 className="w-full border border-gray-300 rounded-full px-4 py-2 pr-10 text-sm focus:outline-none focus:border-blue-500"
+//                             />
+//                             <button
+//                                 type="submit"
+//                                 className="absolute right-3 top-2.5 text-gray-600 hover:text-blue-600"
+//                             >
+//                                 <CiSearch className="h-5 w-5" />
+//                             </button>
+//                         </div>
+//                     </form>
+
+//                     {/* Desktop Nav Items */}
+//                     <div className="hidden md:flex items-center space-x-6">
+//                         {[
+//                             { label: 'Jobs', path: '/alljobs', key: 'job' },
+//                             { label: 'Companies', path: '/CompanyData', key: 'company' },
+//                             { label: 'About Us', path: '/user/aboutus', key: 'aboutUs' },
+//                         ].map(item => (
+//                             <span
+//                                 key={item.key}
+//                                 onClick={() => {
+//                                     setActive(item.key);
+//                                     navigate(item.path);
+//                                 }}
+//                                 className={`text-sm font-medium cursor-pointer transition duration-200 ${active === item.key ? 'text-blue-600' : 'text-gray-700 hover:text-blue-500'}`}>
+//                                 {item.label}
+//                             </span>
+//                         ))}
+
+//                         {/* For Employer */}
+//                         <div className="relative">
+//                             <button
+//                                 onClick={() => setDropdownOpen(!dropdownOpen)}
+//                                 className="text-sm font-medium text-gray-700 hover:text-blue-600"
+//                             >
+//                                 For Employers
+//                             </button>
+//                             {dropdownOpen && (
+//                                 <div className="absolute right-0 mt-2 w-44 bg-white rounded-md shadow-md border z-20">
+//                                     <ul>
+//                                         <li
+//                                             onClick={() => navigate('/employerLogin')}
+//                                             className="px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+//                                         >
+//                                             Employer Login
+//                                         </li>
+//                                         <li
+//                                             onClick={() => navigate('/employerRegistration')}
+//                                             className="px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+//                                         >
+//                                             Employer Register
+//                                         </li>
+//                                     </ul>
+//                                 </div>
+//                             )}
+//                         </div>
+
+//                         {/* Auth Buttons */}
+//                         <button
+//                             onClick={() => navigate('/userLogin')}
+//                             className="text-sm text-gray-600 hover:text-blue-600"
+//                         >
+//                             Login
+//                         </button>
+//                         <button
+//                             onClick={() => navigate('/userRegistration')}
+//                             className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm hover:bg-blue-700 transition"
+//                         >
+//                             Register
+//                         </button>
+//                     </div>
+
+//                     {/* Mobile Menu Button */}
+//                     <div className="md:hidden">
+//                         <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+//                             {isMenuOpen ? (
+//                                 <IoClose className="text-2xl text-gray-700" />
+//                             ) : (
+//                                 <TiThMenu className="text-2xl text-gray-700" />
+//                             )}
+//                         </button>
+//                     </div>
+//                 </div>
+//             </div>
+
+//             {/* Mobile Menu */}
+//             {isMenuOpen && (
+//                 <div className="md:hidden bg-white border-t">
+//                     <div className="flex flex-col p-4 space-y-2">
+//                         <form onSubmit={handleSearchSubmit}>
+//                             <div className="relative mb-3">
+//                                 <input
+//                                     type="text"
+//                                     placeholder="Search jobs, companies..."
+//                                     value={searchQuery}
+//                                     onChange={(e) => setSearchQuery(e.target.value)}
+//                                     className="w-full border border-gray-300 rounded-full px-4 py-2 pr-10 text-sm focus:outline-none focus:border-blue-500"
+//                                 />
+//                                 <button type="submit" className="absolute right-3 top-2.5 text-gray-600 hover:text-blue-600">
+//                                     <CiSearch className="h-5 w-5" />
+//                                 </button>
+//                             </div>
+//                         </form>
+
+//                         {[
+//                             { label: 'Jobs', path: '/alljobs' },
+//                             { label: 'Companies', path: '/CompanyData' },
+//                             { label: 'About Us', path: '/user/aboutus' },
+//                         ].map((item, index) => (
+//                             <button
+//                                 key={index}
+//                                 onClick={() => navigate(item.path)}
+//                                 className="text-left text-gray-700 hover:text-blue-600"
+//                             >
+//                                 {item.label}
+//                             </button>
+//                         ))}
+
+//                         {/* For Employer */}
+//                         <div>
+//                             <button
+//                                 onClick={() => setDropdownOpen(!dropdownOpen)}
+//                                 className="text-left text-gray-700 hover:text-blue-600"
+//                             >
+//                                 For Employers
+//                             </button>
+//                             {dropdownOpen && (
+//                                 <div className="mt-2 border rounded-md">
+//                                     <button
+//                                         onClick={() => navigate('/employerLogin')}
+//                                         className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+//                                     >
+//                                         Employer Login
+//                                     </button>
+//                                     <button
+//                                         onClick={() => navigate('/employerRegistration')}
+//                                         className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+//                                     >
+//                                         Employer Register
+//                                     </button>
+//                                 </div>
+//                             )}
+//                         </div>
+
+//                         <button
+//                             onClick={() => navigate('/userLogin')}
+//                             className="text-left text-gray-700 hover:text-blue-600 mt-2"
+//                         >
+//                             Login
+//                         </button>
+//                         <button
+//                             onClick={() => navigate('/userRegistration')}
+//                             className="bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 mt-2"
+//                         >
+//                             Register
+//                         </button>
+//                     </div>
+//                 </div>
+//             )}
+//         </nav>
+//     );
+// };
+
+// export default LandingNavbar;

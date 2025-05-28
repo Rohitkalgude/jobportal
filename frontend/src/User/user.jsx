@@ -13,7 +13,6 @@ import UserContext from "../Context/userContext";
 import { toast } from "react-toastify";
 
 
-
 function User() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");

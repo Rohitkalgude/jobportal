@@ -68,6 +68,7 @@ function UserProfile() {
     setLoading(false);
   };
 
+  
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -214,10 +215,22 @@ function UserProfile() {
         {/* Contact Info */}
         <div className="mt-6 p-4 bg-gray-50 rounded-lg">
           <h3 className="text-lg font-semibold mb-2">Contact Information</h3>
+
           <p className="flex items-center">
             <IoMailOutline className="text-xl mr-2 text-blue-500" />
-            {user.email}
+            {isEditing ? (
+              <input
+                type="email"
+                name="email"
+                value={user.email}
+                onChange={handleInputChange}
+                className="border p-2 rounded w-full"
+              />
+            ) : (
+              user.email
+            )}
           </p>
+
           <p className="flex items-center mt-2">
             <IoCallOutline className="text-xl mr-2 text-blue-500" />
             {isEditing ? (
@@ -304,19 +317,21 @@ function UserProfile() {
         {/* Resume Upload */}
         <div className="mt-6 p-4 bg-gray-50 rounded-lg">
           <h3 className="text-lg font-semibold mb-2">Resume</h3>
+
           {user.resume ? (
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <a
                 href={user.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 underline"
+                className="text-blue-600 underline hover:text-blue-800 transition"
               >
                 View Resume
               </a>
+
               {isEditing && (
-                <label className="bg-blue-600 text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-blue-700 transition">
-                  Upload New
+                <label className="inline-flex items-center bg-blue-600 text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-blue-700 transition">
+                  <span>Upload New</span>
                   <input
                     type="file"
                     accept=".pdf,.doc,.docx"
@@ -327,8 +342,8 @@ function UserProfile() {
               )}
             </div>
           ) : isEditing ? (
-            <label className="bg-blue-600 text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-blue-700 transition">
-              Upload Resume
+            <label className="inline-flex items-center bg-blue-600 text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-blue-700 transition">
+              <span>Upload Resume</span>
               <input
                 type="file"
                 accept=".pdf,.doc,.docx"
@@ -337,7 +352,7 @@ function UserProfile() {
               />
             </label>
           ) : (
-            <p className="text-gray-500">No resume uploaded</p>
+            <p className="text-gray-500 italic">No resume uploaded</p>
           )}
         </div>
 

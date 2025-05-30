@@ -33,7 +33,7 @@ function EmployerLogin() {
       if (!response.ok) throw new Error(data.message || "Login failed");
 
       toast.success("Login successful!");
-      localStorage.setItem("employerr", JSON.stringify(data)); 
+      localStorage.setItem("employer", JSON.stringify(data)); 
       navigate("/employer/home");
     } catch (err) {
       const message = err.message || "Login failed";

@@ -256,6 +256,8 @@ function User() {
                       className="text-lg font-semibold text-gray-600 mx-2"
                       onClick={() => {
                         toast.success("Logout successfully!");
+                       // localStorage.removeItem("user");
+                        // localStorage.removeItem("token");
                         navigate("/userLogin");
                         setIsSidePanelOpen(!isSidePanelOpen);
                       }}

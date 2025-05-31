@@ -20,25 +20,10 @@ export const EmployerProvider = ({ children }) => {
     company: "",
     mobileNumber: "",
     location: "",
+    imageURL: ""
   }));
 
-  const [jobs, setJobs] = useState(() => loadFromLocalStorage("jobs", []));
-  const [jobDetail, setJobDetail] = useState(() =>
-    loadFromLocalStorage("jobDetail", {
-      _id: "",
-      companyName: "",
-      jobTitle: "",
-      jobType: "",
-      workLocationType: "",
-      salaryType: "",
-      minSalary: "",
-      maxSalary: "",
-      incentive: "",
-      officeAddress: "",
-      jobCity: "",
-      fieldWorkArea: "",
-    })
-  );
+  
 
 
   const [companyDetails, setCompanyDetails] = useState(() =>
@@ -61,33 +46,13 @@ export const EmployerProvider = ({ children }) => {
     localStorage.setItem("employer", JSON.stringify(employer));
   }, [employer]);
 
-  useEffect(() => {
-    localStorage.setItem("jobDetail", JSON.stringify(jobDetail));
-  }, [jobDetail]);
+
+
 
   useEffect(() => {
     localStorage.setItem("companyDetails", JSON.stringify(companyDetails));
   }, [companyDetails]);
 
-  useEffect(() => {
-    localStorage.setItem("jobs", JSON.stringify(jobs));
-  }, [jobs]);
-
-  const addJob = () => {
-    const newJob = { id: Date.now(), ...jobDetail };
-    const updated = [...jobs, newJob];
-    setJobs(updated);
-  };
-
-  const updateJobDetail = (field, value) =>
-    setJobDetail(prev => ({ ...prev, [field]: value }));
-
-
-
-  const updateJob = (updatedJob) => {
-    const updatedJobs = jobs.map(job => job.id === updatedJob.id ? updatedJob : job);
-    setJobs(updatedJobs);
-  };
 
   return (
     <EmployerContext.Provider
@@ -95,11 +60,7 @@ export const EmployerProvider = ({ children }) => {
         imageURL,
         setImageURL,
         employer,
-        setEmployer,
-        jobs,
-        setJobs,
-        jobDetail,
-        setJobDetail,
+        setEmployer, 
         companyDetails,
         setCompanyDetails, // Make sure this is included
       }}

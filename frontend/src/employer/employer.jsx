@@ -41,8 +41,7 @@ function Employer() {
 
   const handleLogout = () => {
     toast.success("Logout successfully!");
-    localStorage.removeItem("employerr");
-    localStorage.removeItem("jobpost")
+    localStorage.removeItem("employer");
     navigate("/employerLogin");
   };
 

@@ -8,7 +8,8 @@ const jobs = require("../controllers/JobController/jobs")
 const blockcompany = require("../controllers/JobController/blockcompany");
 const filterJob = require("../controllers/JobController/filter")
 const savedJobs = require("../controllers/JobController/saveJob");
-const getSavedJobs = require("../controllers/JobController/allsavedjob")
+const getSavedJobs = require("../controllers/JobController/allsavedjob");
+const getJobsByEmployer = require("../controllers/JobController/getJobsByEmployer")
 
 
 const router = express.Router();
@@ -23,6 +24,7 @@ router.put("/block", blockcompany)
 router.get("/filter",filterJob)
 router.post("/savejob", savedJobs);
 router.get("/savedjobs/:userId", getSavedJobs);
+router.get("/employer/:id", getJobsByEmployer);
 
 
 

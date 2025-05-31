@@ -13,16 +13,31 @@ function EmployerHome() {
     fetchJobs();
   }, []);
 
+  // const fetchJobs = async () => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     const config = { headers: { Authorization: `Bearer ${token}` } };
+  //     const response = await axios.get("http://localhost:5000/api/job/alljob", config);
+  //     setJobs(response.data.jobs || []);
+  //   } catch (error) {
+  //     console.error("Error fetching jobs:", error);
+  //   }
+  // };
+
+
   const fetchJobs = async () => {
     try {
       const token = localStorage.getItem("token");
+      const employer = JSON.parse(localStorage.getItem("employer"));
+      const employerId = employer._id;
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.get("http://localhost:5000/api/job/alljob", config);
-      setJobs(response.data.jobs || []);
+      const response = await axios.get(`http://localhost:5000/api/job/employer/${employerId}`, config);
+      setJobs(response.data || []);
     } catch (error) {
       console.error("Error fetching jobs:", error);
     }
   };
+
 
   const handleDeleteJob = async (jobId) => {
     if (!window.confirm("Are you sure you want to delete this job?")) return;

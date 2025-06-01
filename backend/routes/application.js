@@ -13,8 +13,6 @@ router.put("/status", updateApplicationStatus);
 router.get("/applicantjob/:jobId", getApplicantsForJob);
 router.get("/appliedJobs/:applicantId", appliedJobs)
 
-
-
  
 
 module.exports = router;
